@@ -7,7 +7,7 @@ import com.demo2.demo2.entity.common.BaseEntity;
 
 @Entity
 @Table(name = "address")
-public class Address extends BaseEntity {
+public class UserAddress extends BaseEntity {
     
     @Column(name = "line_1", nullable = false)
     private String line1;

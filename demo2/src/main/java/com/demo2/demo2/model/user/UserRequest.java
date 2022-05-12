@@ -1,102 +1,110 @@
-package com.demo2.demo2.entity.common;
+package com.demo2.demo2.model.user;
 
-import java.util.Date;
+import java.util.*;
 
-import javax.persistence.*;
-
-
-@MappedSuperclass
-public abstract class BaseEntity {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserRequest {
+    
     private Integer id;
-
-    @Column(name = "delete_flag", nullable = false)
+    private String userCode;
+    private String userName;
+    private String password;
+    private String isEnabled;
+    private String isLocked;
+    private Date expiredDate;
     private String deleteFlag;
-
-    @Column(name = "created_by", nullable = false)
     private Integer createdBy;
-
-    @Column(name = "created_at", nullable = false)
     private Date createdAt;
-
-    @Column(name = "updated_by")
     private Integer updatedBy;
-
-    @Column(name = "updated_at")
     private Date updatedAt;
-
-    @Column(name = "deleted_by")
     private Integer deletedBy;
-
-    @Column(name = "deleted_at")
     private Date deletedAt;
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
+    public String getUserCode() {
+        return userCode;
+    }
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getIsEnabled() {
+        return isEnabled;
+    }
+    public void setIsEnabled(String isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+    public String getIsLocked() {
+        return isLocked;
+    }
+    public void setIsLocked(String isLocked) {
+        this.isLocked = isLocked;
+    }
+    public Date getExpiredDate() {
+        return expiredDate;
+    }
+    public void setExpiredDate(Date expiredDate) {
+        this.expiredDate = expiredDate;
+    }
     public String getDeleteFlag() {
         return deleteFlag;
     }
-
     public void setDeleteFlag(String deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
-
     public Integer getCreatedBy() {
         return createdBy;
     }
-
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
-
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
     public Integer getUpdatedBy() {
         return updatedBy;
     }
-
     public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
     }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
-
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public Integer getDeletedBy() {
         return deletedBy;
     }
-
     public void setDeletedBy(Integer deletedBy) {
         this.deletedBy = deletedBy;
     }
-
     public Date getDeletedAt() {
         return deletedAt;
     }
-
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
     }
-    
 
+    
+    
 }
