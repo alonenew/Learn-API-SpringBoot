@@ -2,21 +2,15 @@ package com.demo2.demo2.model.user;
 
 import java.util.*;
 
-import com.demo2.demo2.entity.jpa.user.UserAddress;
-import com.demo2.demo2.entity.jpa.user.UserProfile;
-
-
-public class UserRequest {
-
-    private UserProfile profile;
-    private List<UserAddress> addresses;
+public class UserProfileResponse {
     
     private Integer id;
-    private String userCode;
-    private String userName;
-    private String password;
-    private String isEnabled;
-    private String isLocked;
+    private String firstNameTh;
+    private String lastNameTh;
+    private String firstNameEn;
+    private String lastNameEn;
+    private String mobileNumber;
+    private Date birthDate;
     private Date expiredDate;
     private String deleteFlag;
     private Integer createdBy;
@@ -25,55 +19,49 @@ public class UserRequest {
     private Date updatedAt;
     private Integer deletedBy;
     private Date deletedAt;
-
-    public UserProfile getProfile() {
-        return profile;
-    }
-    public void setProfile(UserProfile profile) {
-        this.profile = profile;
-    }
-    public List<UserAddress> getAddresses() {
-        return addresses;
-    }
-    public void setAddresses(List<UserAddress> addresses) {
-        this.addresses = addresses;
-    }
+    
     public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getUserCode() {
-        return userCode;
-    }
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
     
-    public String getPassword() {
-        return password;
+    public String getFirstNameTh() {
+        return firstNameTh;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstNameTh(String firstNameTh) {
+        this.firstNameTh = firstNameTh;
     }
-    public String getIsEnabled() {
-        return isEnabled;
+    public String getLastNameTh() {
+        return lastNameTh;
     }
-    public void setIsEnabled(String isEnabled) {
-        this.isEnabled = isEnabled;
+    public void setLastNameTh(String lastNameTh) {
+        this.lastNameTh = lastNameTh;
     }
-    public String getIsLocked() {
-        return isLocked;
+    public String getFirstNameEn() {
+        return firstNameEn;
     }
-    public void setIsLocked(String isLocked) {
-        this.isLocked = isLocked;
+    public void setFirstNameEn(String firstNameEn) {
+        this.firstNameEn = firstNameEn;
+    }
+    public String getLastNameEn() {
+        return lastNameEn;
+    }
+    public void setLastNameEn(String lastNameEn) {
+        this.lastNameEn = lastNameEn;
+    }
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
     public Date getExpiredDate() {
         return expiredDate;
