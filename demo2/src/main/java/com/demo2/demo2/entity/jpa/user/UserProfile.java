@@ -12,23 +12,35 @@ import com.demo2.demo2.entity.common.BaseEntity;
 public class UserProfile extends BaseEntity{
 
     
-    @Column(name = "first_name_th", nullable = false)
+    @Column(name = "first_name_th", nullable = false, length = 256)
     private String firstNameTh;
 
-    @Column(name = "last_name_th", nullable = false)
+    @Column(name = "last_name_th", nullable = false, length = 256)
     private String lastNameTh;
 
-    @Column(name = "first_name_en", nullable = false)
+    @Column(name = "first_name_en", nullable = false, length = 256)
     private String firstNameEn;
 
-    @Column(name = "last_name_en", nullable = false)
+    @Column(name = "last_name_en", nullable = false, length = 256)
     private String lastNameEn;
 
-    @Column(name = "mobile_number", nullable = false)
+    @Column(name = "mobile_number", nullable = false, length = 20)
     private String mobileNumber;
 
     @Column(name = "birth_date", nullable = true)
-    private Date date;
+    private Date birthDate;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getFirstNameTh() {
         return firstNameTh;
@@ -70,12 +82,12 @@ public class UserProfile extends BaseEntity{
         this.mobileNumber = mobileNumber;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
     
 }

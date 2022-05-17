@@ -2,8 +2,14 @@ package com.demo2.demo2.model.user;
 
 import java.util.*;
 
+import com.demo2.demo2.entity.jpa.user.User;
+import com.demo2.demo2.entity.jpa.user.UserAddress;
+
 public class UserProfileResponse {
     
+    private User user;
+    private List<UserAddress> userAddresses;
+
     private Integer id;
     private String firstNameTh;
     private String lastNameTh;
@@ -19,6 +25,19 @@ public class UserProfileResponse {
     private Date updatedAt;
     private Integer deletedBy;
     private Date deletedAt;
+    
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public List<UserAddress> getUserAddresses() {
+        return userAddresses;
+    }
+    public void setUserAddresses(List<UserAddress> userAddresses) {
+        this.userAddresses = userAddresses;
+    }
     
     public Integer getId() {
         return id;

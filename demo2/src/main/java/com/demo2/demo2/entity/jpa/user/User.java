@@ -1,7 +1,6 @@
 package com.demo2.demo2.entity.jpa.user;
 
-import java.util.Date;
-
+import java.util.*;
 import javax.persistence.*;
 
 import com.demo2.demo2.entity.common.BaseEntity;
@@ -12,23 +11,45 @@ import com.demo2.demo2.entity.common.BaseEntity;
 public class User extends BaseEntity {
 
     
-    @Column(name = "user_code", nullable = false)
+    @Column(name = "user_code", nullable = false, length = 256)
     private String userCode;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, length = 256)
     private String userName;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 512)
     private String password;
 
-    @Column(name = "is_Enabled", nullable = false)
+    @Column(name = "is_Enabled", nullable = false, length = 1)
     private String isEnabled;
 
-    @Column(name = "is_Locked", nullable = false)
+    @Column(name = "is_Locked", nullable = false, length = 1)
     private String isLocked;
 
     @Column(name = "expired_date", nullable = false)
     private Date expiredDate;
+
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    private UserProfile userProfile;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<UserAddress> userAddresses;
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
+
+    public List<UserAddress> getUserAddresses() {
+        return userAddresses;
+    }
+
+    public void setUserAddresses(List<UserAddress> userAddresses) {
+        this.userAddresses = userAddresses;
+    }
 
     public String getUserCode() {
         return userCode;

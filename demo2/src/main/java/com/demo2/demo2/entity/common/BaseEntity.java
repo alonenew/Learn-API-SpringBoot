@@ -13,7 +13,7 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "delete_flag", nullable = false)
+    @Column(name = "delete_flag", nullable = false, length = 1)
     private String deleteFlag;
 
     @Column(name = "created_by", nullable = false)

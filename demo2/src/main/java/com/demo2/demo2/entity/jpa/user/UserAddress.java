@@ -9,20 +9,32 @@ import com.demo2.demo2.entity.common.BaseEntity;
 @Table(name = "address")
 public class UserAddress extends BaseEntity {
     
-    @Column(name = "line_1", nullable = false)
+    @Column(name = "line_1", nullable = false, length = 512)
     private String line1;
 
-    @Column(name = "line_2", nullable = false)
+    @Column(name = "line_2", nullable = false, length = 512)
     private String line2;
 
-    @Column(name = "postcode", nullable = false)
+    @Column(name = "postcode", nullable = false, length = 20)
     private String postCode;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "type", nullable = false, length = 20)
     private String type;
 
-    @Column(name = "prefer", nullable = false)
+    @Column(name = "prefer", nullable = false, length = 1)
     private String prefer;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getLine1() {
         return line1;

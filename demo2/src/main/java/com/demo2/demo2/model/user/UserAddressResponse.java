@@ -2,7 +2,11 @@ package com.demo2.demo2.model.user;
 
 import java.util.*;
 
+import com.demo2.demo2.entity.jpa.user.User;
+
 public class UserAddressResponse {
+
+    private User user;
     
     private Integer id;
     private String line1;
@@ -18,6 +22,12 @@ public class UserAddressResponse {
     private Integer deletedBy;
     private Date deletedAt;
     
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
     public Integer getId() {
         return id;
     }
