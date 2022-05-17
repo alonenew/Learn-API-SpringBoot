@@ -4,6 +4,9 @@ import com.demo2.demo2.model.user.UserRegisterResponse;
 import com.demo2.demo2.model.user.UserRequest;
 import com.demo2.demo2.service.user.UserService;
 import com.demo2.demo2.model.user.UserRegisterRequest;
+
+import javax.validation.Valid;
+
 import com.demo2.demo2.entity.jpa.user.User;
 import com.demo2.demo2.model.common.SuccessResponse;
 
@@ -23,7 +26,7 @@ public class UserController {
     private UserService userService;
     
     @PostMapping("/register")        
-    public ResponseEntity<SuccessResponse<UserRegisterResponse>> register(@RequestBody UserRegisterRequest userRegisterRequest){
+    public ResponseEntity<SuccessResponse<UserRegisterResponse>> register(@Valid @RequestBody UserRegisterRequest userRegisterRequest){
         UserRegisterResponse userRegisterResponse = userService.register(userRegisterRequest);
         SuccessResponse<UserRegisterResponse> successResponse = new SuccessResponse<UserRegisterResponse>();
         successResponse.setData(userRegisterResponse);

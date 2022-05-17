@@ -3,7 +3,6 @@ package com.demo2.demo2;
 import java.util.*;
 
 import com.demo2.demo2.model.user.*;
-import com.demo2.demo2.repository.jpa.UserRepository;
 import com.demo2.demo2.service.user.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,10 @@ class Demo2ApplicationTests {
 	private UserService userService;
 
 	interface UserDataTest {
-		String usercode = "022";
-		String userName = "patamawadee";
+		String usercode = "025";
+		String userName = "patamawadeeK";
 		String password = "P@ssw0rdMFEC";
-		Integer user_id = 22;
+		Integer user_id = 25;
 		String fisrtNameTh = "สิทธิชัย";
 		String lastNameTh = "ธรรมวัตร";
 		String fisrtNameEn = "Sittichai";

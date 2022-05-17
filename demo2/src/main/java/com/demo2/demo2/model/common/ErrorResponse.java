@@ -2,42 +2,48 @@ package com.demo2.demo2.model.common;
 
 import java.util.Date;
 
-import com.demo2.demo2.constant.ResultCode;
-import com.demo2.demo2.util.DateUtil;
+import com.demo2.demo2.constant.StatusCode;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class ErrorResponse {
-    private String code;
-    private String desc;
-    private String time;
+public class ErrorResponse<T> {
+    
+    private StatusResponse status;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private T errors;
 
     public ErrorResponse(){
-        this.code = ResultCode.ERR_CODE_500;
-        this.desc = ResultCode.ERR_CODE_500;
-        this.time = DateUtil.responseDateTime(new Date());
+        this.status = new StatusResponse(StatusCode.ERR_CODE_500, StatusCode.ERR_DESC_500, new Date());
     }
 
     public ErrorResponse(String code, String desc){
-        this.code = code;
-        this.desc = desc;
-        this.time = DateUtil.responseDateTime(new Date());
+        this.status = new StatusResponse(code, desc, new Date());
     }
 
-    public String getCode() {
-        return code;
+    public ErrorResponse(T errors){
+        this.status = new StatusResponse(StatusCode.ERR_CODE_500, StatusCode.ERR_DESC_500, new Date());
+        this.errors = errors;
     }
-    public void setCode(String code) {
-        this.code = code;
+
+    public ErrorResponse(String code, String desc, T errors){
+        this.status = new StatusResponse(code, desc, new Date());
+        this.errors = errors;
     }
-    public String getDesc() {
-        return desc;
+
+    public StatusResponse getStatus() {
+        return status;
     }
-    public void setDesc(String desc) {
-        this.desc = desc;
+
+    public void setStatus(StatusResponse status) {
+        this.status = status;
     }
-    public String getTime() {
-        return time;
+
+    public T getErrors() {
+        return errors;
     }
-    public void setTime(String time) {
-        this.time = time;
+
+    public void setErrors(T errors) {
+        this.errors = errors;
     }
+
 }

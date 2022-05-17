@@ -4,7 +4,7 @@ import java.util.*;
 
 import javax.transaction.Transactional;
 
-import com.demo2.demo2.constant.ResultCode;
+import com.demo2.demo2.constant.StatusCode;
 import com.demo2.demo2.entity.jpa.user.*;
 import com.demo2.demo2.exception.BusinessException;
 import com.demo2.demo2.model.user.*;
@@ -133,7 +133,7 @@ public class UserService {
     public void deleteUser(UserRequest userRequest){
         Optional<User> deleteUser = userRepository.findByUserName(userRequest.getUserName());
         if(!deleteUser.isPresent()) {
-			throw new BusinessException(ResultCode.ERR_CODE_401, ResultCode.ERR_DESC_401);
+			throw new BusinessException(StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
 		}
         userRepository.delete(deleteUser.get());
     }

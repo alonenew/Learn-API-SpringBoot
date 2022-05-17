@@ -2,20 +2,20 @@ package com.demo2.demo2.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class CommonException extends RuntimeException{
+public class BaseException extends RuntimeException{
 	
 	private final HttpStatus status;
 	private final String code;
 	private final Exception causeException;
 	
-	public CommonException(HttpStatus status, String code, String message) {
+	public BaseException(HttpStatus status, String code, String message) {
 		super(message);
 		this.status = status;
 		this.code = code;
 		this.causeException = null;
 	}
 	
-	public CommonException(HttpStatus status, String code, String message, Exception causeException) {
+	public BaseException(HttpStatus status, String code, String message, Exception causeException) {
 		super(message);
 		this.status = status;
 		this.code = code;

@@ -1,11 +1,17 @@
 package com.demo2.demo2.model.user;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UserRegisterRequest {
 
     private Integer userId;
-    private String userName;
-    private String password;
     
+    @NotEmpty(message = "The username is required.")
+    private String userName;
+
+    @NotEmpty(message = "The password is required.")
+    private String password;
+
     public Integer getUserId() {
         return userId;
     }

@@ -1,6 +1,6 @@
 package com.demo2.demo2.constant;
 
-public class ResultCode {
+public class StatusCode {
 
     public static final String SUC_CODE_200 = "200";
     public static final String SUC_DESC_200 = "Success";

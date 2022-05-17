@@ -2,60 +2,36 @@ package com.demo2.demo2.model.common;
 
 import java.util.Date;
 
-import com.demo2.demo2.constant.ResultCode;
-import com.demo2.demo2.util.DateUtil;
+import com.demo2.demo2.constant.StatusCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class SuccessResponse<T> {
-	private String code;
-    private String desc;
-    private String time;
+
+    private StatusResponse status;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
     public SuccessResponse(){
-        this.code = ResultCode.SUC_CODE_200;
-        this.desc = ResultCode.SUC_DESC_200;
-        this.time = DateUtil.responseDateTime(new Date());
+        this.status = new StatusResponse(StatusCode.SUC_CODE_200, StatusCode.SUC_DESC_200, new Date());
     }
 
     public SuccessResponse(T data){
-        this.code = ResultCode.SUC_CODE_200;
-        this.desc = ResultCode.SUC_DESC_200;
-        this.time = DateUtil.responseDateTime(new Date());
+        this.status = new StatusResponse(StatusCode.SUC_CODE_200, StatusCode.SUC_DESC_200, new Date());
         this.data = data;
     }
 
     public SuccessResponse(String code, String desc, T data){
-        this.code = code;
-        this.desc = desc;
-        this.time = DateUtil.responseDateTime(new Date());
+        this.status = new StatusResponse(code, desc, new Date());
         this.data = data;
     }
 
-    public String getCode() {
-        return code;
+    public StatusResponse getStatus() {
+        return status;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setStatus(StatusResponse status) {
+        this.status = status;
     }
 
     public T getData() {
@@ -65,4 +41,5 @@ public class SuccessResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
+    
 }
