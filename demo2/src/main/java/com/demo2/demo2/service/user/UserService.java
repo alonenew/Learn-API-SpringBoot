@@ -6,15 +6,25 @@ import javax.transaction.Transactional;
 
 import com.demo2.demo2.constant.StatusCode;
 import com.demo2.demo2.entity.jpa.user.*;
+import com.demo2.demo2.exception.BaseException;
 import com.demo2.demo2.exception.BusinessException;
 import com.demo2.demo2.model.user.*;
 import com.demo2.demo2.repository.jpa.*;
+import com.demo2.demo2.security.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -31,7 +41,7 @@ public class UserService {
         User user = new User();
         user.setUserCode(userRequest.getUserCode());
         user.setUserName(userRequest.getUserName());
-        user.setPassword(userRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.setIsEnabled("Y");
         user.setIsLocked("N");
         user.setExpiredDate(new Date());
@@ -143,7 +153,7 @@ public class UserService {
         User user = new User();
         user.setUserCode(userRegisterRequest.getUserName());
         user.setUserName(userRegisterRequest.getUserName());
-        user.setPassword(userRegisterRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
         user.setIsEnabled("Y");
         user.setIsLocked("N");
         user.setExpiredDate(new Date());
@@ -246,4 +256,24 @@ public class UserService {
         userResponse.setAddress(addressResponses);
         return userResponse;
     }   
+
+    public UserAuthenResponse authen(UserAuthenRequest userAuthenRequest){
+        Optional<User> userOptional = userRepository.findByUserName(userAuthenRequest.getUserName());
+       
+        if (!userOptional.isPresent()) {
+            throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
+        }
+        User user = userOptional.get();
+        if(!(passwordEncoder.matches(userAuthenRequest.getPassword(), user.getPassword()))){
+            throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
+        }
+
+        String token = jwtUtil.generateToken(user.getUserName());
+        UserAuthenResponse userAuthenResponse = new UserAuthenResponse();
+        userAuthenResponse.setUserId(user.getId());
+        userAuthenResponse.setUserName(user.getUserName());
+        userAuthenResponse.setToken(token);
+
+        return userAuthenResponse;
+    }
 }
