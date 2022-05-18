@@ -46,10 +46,10 @@ public class FileStorageService {
             }
             Resource resource = new UrlResource(filePath.toUri());
             if((resource.exists()) && (resource.isReadable())){
-                // "urlPreview": "http://localhost:8080/api/v1/file/preview/124785.jpg",
+                // "urlPreview": "http://localhost:8080/api/v1/file/preview/filename.jpg",
                 String urlPreview = MvcUriComponentsBuilder.fromMethodName(FileController.class, "previewFile", filePath.getFileName().toString()).build().toString();
-                    
-                // "urlDownload": "http://localhost:8080/api/v1/file/download/124785.jpg"            
+
+                // "urlDownload": "http://localhost:8080/api/v1/file/download/filename.jpg"            
                 String urlDownload = MvcUriComponentsBuilder.fromMethodName(FileController.class, "downloadFile", filePath.getFileName().toString()).build().toString();                
                 
                 FileResponse fileResponse = new FileResponse();
