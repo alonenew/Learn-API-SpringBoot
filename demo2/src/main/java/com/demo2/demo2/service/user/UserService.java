@@ -14,6 +14,7 @@ import com.demo2.demo2.security.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -125,8 +126,7 @@ public class UserService {
 
     @Transactional
     public User updateUser(UserRequest userRequest){
-        Optional<User> updateUser = userRepository.findByUserName(userRequest.getUserName());
-        User user = updateUser.get();
+        User user = userRepository.findByUserName(userRequest.getUserName());
         user.setUserCode(userRequest.getUserCode());
         user.setUserName(userRequest.getUserName());
         user.setPassword(user.getPassword());
@@ -141,11 +141,11 @@ public class UserService {
 
     @Transactional
     public void deleteUser(UserRequest userRequest){
-        Optional<User> deleteUser = userRepository.findByUserName(userRequest.getUserName());
-        if(!deleteUser.isPresent()) {
+        User deleteUser = userRepository.findByUserName(userRequest.getUserName());
+        if(deleteUser != null) {
 			throw new BusinessException(StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
 		}
-        userRepository.delete(deleteUser.get());
+        userRepository.delete(deleteUser);
     }
 
     @Transactional
@@ -258,12 +258,11 @@ public class UserService {
     }   
 
     public UserAuthenResponse authen(UserAuthenRequest userAuthenRequest){
-        Optional<User> userOptional = userRepository.findByUserName(userAuthenRequest.getUserName());
+        User user = userRepository.findByUserName(userAuthenRequest.getUserName());
        
-        if (!userOptional.isPresent()) {
+        if (user == null) {
             throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
-        }
-        User user = userOptional.get();
+        };
         if(!(passwordEncoder.matches(userAuthenRequest.getPassword(), user.getPassword()))){
             throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
         }
@@ -274,6 +273,17 @@ public class UserService {
         userAuthenResponse.setUserName(user.getUserName());
         userAuthenResponse.setToken(token);
 
+        return userAuthenResponse;
+    }
+
+    public UserAuthenResponse refreshToken(){
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByUserName(username);
+        String token = jwtUtil.generateToken(username);
+        UserAuthenResponse userAuthenResponse = new UserAuthenResponse();
+        userAuthenResponse.setUserId(user.getId());
+        userAuthenResponse.setUserName(user.getUserName());
+        userAuthenResponse.setToken(token);
         return userAuthenResponse;
     }
 }

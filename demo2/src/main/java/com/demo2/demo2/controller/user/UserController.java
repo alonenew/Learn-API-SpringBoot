@@ -1,4 +1,4 @@
-package com.demo2.demo2.controller;
+package com.demo2.demo2.controller.user;
 
 import com.demo2.demo2.model.user.UserRegisterResponse;
 import com.demo2.demo2.model.user.UserRequest;
@@ -47,6 +47,11 @@ public class UserController {
         return ResponseEntity.ok(new SuccessResponse<UserAuthenResponse>(userService.authen(userAuthenRequest)));
     }
 
+    @GetMapping("/refresh-authen")        
+    public ResponseEntity<SuccessResponse<UserAuthenResponse>> refreshToken(){
+        return ResponseEntity.ok(new SuccessResponse<UserAuthenResponse>(userService.refreshToken()));
+    }
+
     @PatchMapping("/update")      
     public ResponseEntity<SuccessResponse<User>> update(@RequestBody UserRequest userRequest){
         return ResponseEntity.ok(new SuccessResponse<User>(userService.updateUser(userRequest)));
@@ -62,5 +67,7 @@ public class UserController {
     public ResponseEntity<SuccessResponse<String>> test(@PathVariable String id){
         return ResponseEntity.ok(new SuccessResponse<String>(id));
     }
+
+    
 
 }
